@@ -14,7 +14,7 @@ public class API_Call {
     public API_Call(DataManipulation manipulate) {
         this.manipulate = manipulate;
     }
-
+    
     @GetMapping("create")
     public String Create(@RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "name", required = true) String name,
@@ -31,7 +31,7 @@ public class API_Call {
 
         manipulate.store(newContact);
 
-        return "Success";
+        return "SERVER: Success";
     }
 
     @GetMapping("fetch")
@@ -47,11 +47,11 @@ public class API_Call {
 
         manipulate.delete(id);
         
-        return "Deleted Contact";
+        return "SERVER: Deleted Contact";
     }
 
     @GetMapping("update")
-    public void Update(@RequestParam(value = "id", required = true) String id,
+    public String Update(@RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "number", required = true) String number,
             @RequestParam(value = "email", required = true) String email,
@@ -65,6 +65,8 @@ public class API_Call {
         Contact updatedContact = new Contact(id, name, number, email, address, city, state, zip, bday, linked);
 
         manipulate.update(updatedContact);
+        
+        return "SERVER: Updated";
     }
 
 }
