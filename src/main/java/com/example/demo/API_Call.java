@@ -5,8 +5,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class API_Call {
 
     private final DataManipulation manipulate;
@@ -15,7 +19,7 @@ public class API_Call {
         this.manipulate = manipulate;
     }
     
-    @GetMapping("create")
+    @PostMapping("create")
     public String Create(@RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "number", required = true) String number,
@@ -31,7 +35,8 @@ public class API_Call {
 
         manipulate.store(newContact);
 
-        return "SERVER: Success";
+        Gson gson = new Gson();
+        return gson.toJson("SERVER: Success");
     }
 
     @GetMapping("fetch")
@@ -42,12 +47,13 @@ public class API_Call {
         return gson.toJson(manipulate.fetch());
     }
 
-    @GetMapping("delete")
+    @DeleteMapping("delete")
     public String Delete(@RequestParam(value = "id", required = true) String id) {
 
         manipulate.delete(id);
         
-        return "SERVER: Deleted Contact";
+        Gson gson = new Gson();
+        return gson.toJson("SERVER: Deleted Contact " + id);
     }
 
     @GetMapping("update")
@@ -66,7 +72,8 @@ public class API_Call {
 
         manipulate.update(updatedContact);
         
-        return "SERVER: Updated";
+        Gson gson = new Gson();
+        return gson.toJson("SERVER: Updated");
     }
 
 }

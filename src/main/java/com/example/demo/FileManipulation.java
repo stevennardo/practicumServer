@@ -16,7 +16,7 @@ public class FileManipulation {
     public ArrayList<Contact> extract() {
         ArrayList<Contact> fromFile = new ArrayList<>();
 
-        File dataFile = new File("data.txt");
+        File dataFile = new File("contacts.txt");
 
         if (dataFile.exists()) {
             String content = "";
@@ -30,17 +30,13 @@ public class FileManipulation {
 
             fromFile = gson.fromJson(content, new TypeToken<List<Contact>>() {
             }.getType());
-
-        } else {
-            Contact temp = new Contact("DNE");
-            fromFile.add(temp);
-        }
+        } 
 
         return fromFile;
     }
 
     public void overwrite(ArrayList<Contact> DataCollection) {
-        File file = new File("data.txt");
+        File file = new File("contacts.txt");
         FileWriter writer = null;
         Gson gson = new Gson();
 
@@ -60,6 +56,6 @@ public class FileManipulation {
     }
 
     public String read() throws IOException {
-        return new String(Files.readAllBytes(Paths.get("data.txt")));
+        return new String(Files.readAllBytes(Paths.get("contacts.txt")));
     }
 }

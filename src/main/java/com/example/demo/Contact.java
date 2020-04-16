@@ -38,7 +38,8 @@ public class Contact {
         this.bday = bday;
     }
 
-    public Contact(String name) {
+    public Contact(String id, String name) {
+        this.id = id;
         this.name = name;
     }
 }

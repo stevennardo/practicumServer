@@ -12,7 +12,7 @@ public class DataManipulation {
     public void store(Contact request) {
 
         DataCollection.add(request);
-
+        
         // to file
         alterFile.overwrite(DataCollection);
     }
@@ -43,6 +43,7 @@ public class DataManipulation {
     }
 
     public ArrayList<Contact> fetch() {
+        
         return alterFile.extract();
     }
 }
