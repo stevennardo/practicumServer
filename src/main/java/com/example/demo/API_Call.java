@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
@@ -19,6 +18,7 @@ public class API_Call {
         this.manipulate = manipulate;
     }
     
+    @CrossOrigin("*")
     @PostMapping("create")
     public String Create(@RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "name", required = true) String name,
@@ -29,7 +29,7 @@ public class API_Call {
             @RequestParam(value = "state", required = true) String state,
             @RequestParam(value = "zip", required = true) String zip,
             @RequestParam(value = "bday", required = true) String bday,
-            @RequestParam(value = "linked", required = true) String linked) {
+            @RequestParam(value = "linked", required = false) String linked) {
 
         Contact newContact = new Contact(id, name, number, email, address, city, state, zip, bday, linked);
 
@@ -39,6 +39,7 @@ public class API_Call {
         return gson.toJson("SERVER: Success");
     }
 
+    @CrossOrigin("*")
     @GetMapping("fetch")
     public String Fetch() {
 
@@ -47,7 +48,8 @@ public class API_Call {
         return gson.toJson(manipulate.fetch());
     }
 
-    @DeleteMapping("delete")
+    @CrossOrigin("*")
+    @GetMapping("delete")
     public String Delete(@RequestParam(value = "id", required = true) String id) {
 
         manipulate.delete(id);
@@ -56,6 +58,7 @@ public class API_Call {
         return gson.toJson("SERVER: Deleted Contact " + id);
     }
 
+    @CrossOrigin("*")
     @GetMapping("update")
     public String Update(@RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "name", required = true) String name,
@@ -66,7 +69,7 @@ public class API_Call {
             @RequestParam(value = "state", required = true) String state,
             @RequestParam(value = "zip", required = true) String zip,
             @RequestParam(value = "bday", required = true) String bday,
-            @RequestParam(value = "linked", required = true) String linked) {
+            @RequestParam(value = "linked", required = false) String linked) {
 
         Contact updatedContact = new Contact(id, name, number, email, address, city, state, zip, bday, linked);
 
