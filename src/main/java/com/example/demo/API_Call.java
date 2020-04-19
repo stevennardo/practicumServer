@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -19,7 +18,7 @@ public class API_Call {
     }
     
     @CrossOrigin("*")
-    @PostMapping("create")
+    @GetMapping("create")
     public String Create(@RequestParam(value = "id", required = true) String id,
             @RequestParam(value = "name", required = true) String name,
             @RequestParam(value = "number", required = true) String number,
